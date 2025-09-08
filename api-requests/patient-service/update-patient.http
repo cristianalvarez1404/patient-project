@@ -1,0 +1,10 @@
+### PUT update pattient
+PUT http://localhost:4001/patiensts/22797f1e-4e2c-45c8-b003-64a7e38f22f9
+Content-Type: application/json
+
+{
+    "name":"joe",
+    "email":"joe@prueba.com",
+    "address":"New York - AV 8",
+    "dateOfBirth":"1990-07-09"
+}

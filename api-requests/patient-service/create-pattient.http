@@ -1,4 +1,13 @@
 ### POST request to create a patient
 POST http://localhost:4001/patients
+Content-Type: application/json
+
+{
+    "name":"cristian",
+    "email":"cristian@prueba.com",
+    "address":"New York - AV 8",
+    "dateOfBirth":"1990-07-09",
+    "registeredDate":"2025-09-07"
+}
 
 ###
