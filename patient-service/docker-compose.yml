@@ -14,6 +14,29 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     networks:
       - internal
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USERNAME} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  patient-service:
+    build: .
+    container_name: patient-service
+    ports:
+      - "5001:4000"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      SPRING_SQL_INIT_MODE: ${SPRING_SQL_INIT_MODE}
+      SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION: ${SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION}
+    depends_on:
+      patient-service-db:
+        condition: service_healthy
+    networks:
+      - internal
 
 networks:
   internal:
